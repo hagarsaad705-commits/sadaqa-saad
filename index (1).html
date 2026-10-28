@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صدقة جارية - المرحوم سعد محمد سعد النجار</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1b4332;
+            --secondary-color: #d8f3dc;
+            --accent-color: #b7b7a4;
+            --bg-color: #f4f6f4;
+            --text-color: #2b2b2b;
+            --white: #ffffff;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 30px;
+            text-align: center;
+        }
+        .header-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-family: 'Amiri', serif;
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .quran-verse {
+            font-family: 'Amiri', serif;
+            font-size: 20px;
+            color: var(--primary-color);
+            background: var(--secondary-color);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        .card {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .card p {
+            font-family: 'Amiri', serif;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        .btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 25px;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .btn:hover {
+            background-color: #2d6a4f;
+        }
+        .counter-section {
+            margin-top: 30px;
+            border-top: 2px dashed #eee;
+            padding-top: 20px;
+        }
+        .counter-btn {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-size: 24px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(27, 67, 50, 0.3);
+            transition: transform 0.1s, background 0.3s;
+            margin: 15px 0;
+            font-family: 'Amiri', serif;
+        }
+        .counter-btn:active {
+            transform: scale(0.95);
+        }
+        .counter-display {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        footer {
+            margin-top: 30px;
+            font-size: 13px;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-icon">🕌</div>
+        <p class="subtitle">صدقة جارية</p>
+        <h1>سعد محمد سعد النجار</h1>
+        <p class="subtitle">رحمه الله وأسكنه فسيح جناته</p>
+
+        <div class="quran-verse">
+            ﴿ يَا أَيَّتُهَا النَّفْسُ الْمُطْمَئِنَّةُ ارْجِعِي إِلَىٰ رَبِّكِ رَاضِيَةً مَّرْضِيَّةً فَادْخُلِي فِي عِبَادِي وَادْخُلِي جَنَّتِي ﴾
+        </div>
+
+        <!-- قسم الأدعية المتغيرة -->
+        <div class="card">
+            <p id="dua-text">اللهم اغفر له وارحمه، وعافه واعف عنه، وأكرم نزله، ووسع مدخله.</p>
+            <button class="btn" onclick="nextDua()">دعاء آخر</button>
+        </div>
+
+        <!-- قسم التسبيح -->
+        <div class="counter-section">
+            <p style="font-weight: 600; margin-bottom: 5px;">اضغط للتسبيح والدعاء له:</p>
+            <button class="counter-btn" onclick="incrementCounter()">
+                <span id="count">0</span>
+            </button>
+            <p class="counter-display">تسبيحة</p>
+        </div>
+
+        <footer>
+            كل حرفٍ تقرأه هنا بنيّةٍ خالصة، ثوابه صدقة جارية لروح المرحوم بإذن الله.
+        </footer>
+    </div>
+
+    <script>
+        const duas = [
+            "اللهم اغفر له وارحمه، وعافه واعف عنه، وأكرم نزله، ووسع مدخله.",
+            "اللهم أبدله داراً خيراً من داره، وأهلاً خيراً من أهله، وأدخله الجنة من غير حساب ولا سابقة عذاب.",
+            "اللهم اجعل قبره روضة من رياض الجنة ولا تجعله حفرة من حفر النار.",
+            "اللهم ارحمه تحت الأرض، واستره يوم العرض، ولا تخزه يوم يبعثون.",
+            "اللهم أنزل على قبره الضياء والنور والفسحة والسرور."
+        ];
+        
+        let currentDuaIndex = 0;
+        function nextDua() {
+            currentDuaIndex = (currentDuaIndex + 1) % duas.length;
+            document.getElementById("dua-text").innerText = duas[currentDuaIndex];
+        }
+
+        let count = 0;
+        function incrementCounter() {
+            count++;
+            document.getElementById("count").innerText = count;
+        }
+    </script>
+</body>
+</html>
